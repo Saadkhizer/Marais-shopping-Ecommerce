@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens: high contrast monochromatic.
+
+   Pure white ground, jet black type, faint fog gray structure, one crimson
+   accent. The product photography does the visual work; the interface stays
+   out of its way.
+
+   Two crimsons on purpose. White text on #E63946 measures 4.17:1, which is
+   under the 4.5:1 WCAG AA floor for normal size text, so the brand crimson is
+   used for decoration only (hover fills, rules, small marks). Anything
+   carrying text uses --color-accent-deep at 6.22:1.
+
+   Verified ratios:
+     ink        on paper       21.00:1
+     ink-soft   on paper        7.81:1
+     accent-deep on paper       6.22:1
+     white      on accent-deep  6.22:1
+     white      on ink         21.00:1
+     ink-soft   on paper-alt    7.10:1
+--------------------------------------------------------------------------- */
+@theme {
+  --color-paper: #ffffff;
+  --color-paper-alt: #f4f4f4;
+  --color-surface: #ffffff;
+  --color-ink: #000000;
+  --color-ink-soft: #525252;
+  --color-line: #e5e5e5;
+
+  /* Brand crimson. Decoration only, never behind normal size text. */
+  --color-accent: #e63946;
+  /* Text safe crimson. Buttons, links, labels. */
+  --color-accent-deep: #c1121f;
+
+  --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", "Segoe UI Mono",
+    Consolas, "SFMono-Regular", Menlo, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-display);
+    -webkit-font-smoothing: antialiased;
+  }
+  /* A single visible focus treatment for the whole app. Keyboard users get a
+     clear ring; mouse users never see it. */
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+}
+
+/* Every animated element in this project moves transform or opacity only, so
+   this one block is a complete reduced motion fallback rather than a partial
+   one. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Horizontal rails scroll without showing a scrollbar. */
+.rail-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rail-scroll::-webkit-scrollbar {
+  display: none;
+}

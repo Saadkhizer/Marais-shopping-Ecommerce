@@ -1,0 +1,2 @@
+# Netlify: hand every path to the React app so client side routes resolve.
+/*  /index.html  200
