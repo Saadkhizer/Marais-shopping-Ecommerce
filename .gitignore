@@ -5,3 +5,7 @@ dist
 server/.env
 .DS_Store
 *.log
+
+# Local redesign / patch bundles
+*.patch
+*.zip

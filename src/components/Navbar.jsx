@@ -55,11 +55,17 @@ export default function Navbar() {
           </svg>
         </button>
 
+        {/* Wordmark. Serif with normal case and near-zero tracking; the
+            spaced-out ALL-CAPS treatment reads as generic startup chrome,
+            whereas this reads as a fashion masthead, which is what the brand
+            is. Optical size held small so the serifs stay refined at logo
+            scale rather than blooming into a display cut. */}
         <Link
           to="/"
-          className="font-display text-[22px] font-bold tracking-[0.22em] text-ink"
+          className="font-display text-[26px] font-normal tracking-[-0.01em] text-ink"
+          style={{ fontVariationSettings: '"opsz" 60' }}
         >
-          MARAIS
+          Marais
         </Link>
 
         <nav className="hidden items-center gap-9 lg:flex">

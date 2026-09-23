@@ -35,8 +35,8 @@ export default function App() {
     <>
       <ScrollToTop />
 
-      <div className="bg-ink px-4 py-2.5 text-center font-mono text-[11.5px] tracking-widest text-white/85">
-        Free shipping over $75. Autumn Winter 2026 is now live.
+      <div className="bg-ink px-4 py-2.5 text-center text-[12.5px] font-light tracking-[0.02em] text-white/85">
+        Free shipping over $75 &nbsp;·&nbsp; Autumn Winter 2026 is now live
       </div>
 
       <Navbar />

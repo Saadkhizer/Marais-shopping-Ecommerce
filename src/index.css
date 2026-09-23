@@ -1,42 +1,48 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   Design tokens: high contrast monochromatic.
+   Design tokens: editorial minimalism.
 
-   Pure white ground, jet black type, faint fog gray structure, one crimson
-   accent. The product photography does the visual work; the interface stays
-   out of its way.
+   White stays the primary ground. Warm cream is a single accent surface,
+   reserved for editorial bands (UspStrip today, more later), which is the
+   pattern used by NEUTRA and similar quiet-luxury lines: white main page,
+   cream editorial moments, disciplined black CTAs, italic serif carrying the
+   emphasis that a coloured accent would otherwise carry.
 
-   Two crimsons on purpose. White text on #E63946 measures 4.17:1, which is
-   under the 4.5:1 WCAG AA floor for normal size text, so the brand crimson is
-   used for decoration only (hover fills, rules, small marks). Anything
-   carrying text uses --color-accent-deep at 6.22:1.
+   Deliberately no coloured brand accent. Discount badges and interaction
+   feedback ride on motion, size, and italic type rather than a hover-colour.
+   Adding a coloured accent later is a two-line change here.
 
-   Verified ratios:
-     ink        on paper       21.00:1
-     ink-soft   on paper        7.81:1
-     accent-deep on paper       6.22:1
-     white      on accent-deep  6.22:1
-     white      on ink         21.00:1
-     ink-soft   on paper-alt    7.10:1
+   Verified ratios (WCAG AA needs 4.5:1 for normal text, 3:1 for large):
+     ink        on paper      21.00:1
+     ink-soft   on paper       5.74:1
+     ink-soft   on paper-alt   5.44:1
+     white      on ink        21.00:1
 --------------------------------------------------------------------------- */
 @theme {
-  --color-paper: #ffffff;
-  --color-paper-alt: #f4f4f4;
-  --color-surface: #ffffff;
-  --color-ink: #000000;
-  --color-ink-soft: #525252;
-  --color-line: #e5e5e5;
+  --color-paper: #ffffff;       /* white primary ground */
+  --color-paper-alt: #f4f1ea;   /* warm cream: editorial accent bands only */
+  --color-surface: #ffffff;     /* cards and product panels stay on white */
+  --color-ink: #000000;         /* pure ink for type and primary CTAs */
+  --color-ink-soft: #6b6b6b;    /* neutral gray body copy */
+  --color-line: #e5e5e5;        /* light gray rule */
 
-  /* Brand crimson. Decoration only, never behind normal size text. */
-  --color-accent: #e63946;
-  /* Text safe crimson. Buttons, links, labels. */
-  --color-accent-deep: #c1121f;
+  /* Both accent tokens resolve to ink. Every existing class that references
+     accent (cart badge, hover fills, error borders) collapses to the same
+     black-and-white system without touching the components. To reintroduce
+     a coloured accent later, change these two values and everything follows. */
+  --color-accent: #000000;
+  --color-accent-deep: #000000;
 
-  --font-display: "Outfit", ui-sans-serif, system-ui, -apple-system, "Segoe UI",
-    Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Code", "Segoe UI Mono",
-    Consolas, "SFMono-Regular", Menlo, monospace;
+  /* Fraunces (variable serif, optical size axis) carries display work. Inter
+     Tight handles body and interface text. The old mono role folds into
+     Inter Tight rather than a third face; ALL-CAPS mono microtype on every
+     label is one of the strongest tells of a templated page. */
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Inter Tight", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "Inter Tight", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 }
 
 @layer base {
@@ -46,7 +52,9 @@
   body {
     background-color: var(--color-paper);
     color: var(--color-ink);
-    font-family: var(--font-display);
+    /* Body defaults to the sans; display serif is opted in at headlines and
+       specific editorial moments via the font-display class. */
+    font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
   /* A single visible focus treatment for the whole app. Keyboard users get a
