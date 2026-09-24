@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import Hero from "../components/Hero.jsx";
+import HeroStage from "../components/HeroStage.jsx";
 import CategoryGrid from "../components/CategoryGrid.jsx";
 import ProductGrid from "../components/ProductGrid.jsx";
 import Editorial from "../components/Editorial.jsx";
@@ -51,7 +51,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Hero />
+      <HeroStage />
       <CategoryGrid />
       <ProductGrid
         products={catalog}

@@ -69,8 +69,8 @@ export default function Hero() {
           to hold the fold on a laptop without the copy column feeling short. */}
       <div className="relative min-h-[420px] sm:min-h-[520px] lg:min-h-[680px]">
         <SmartImage
-          src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1400&q=85"
-          alt="Model in a MARAIS wool overcoat, autumn winter campaign"
+          src="https://images.unsplash.com/photo-1732352706192-6006209ca1be?auto=format&fit=crop&w=1400&q=85"
+          alt="Model in a full-length MARAIS wool coat, autumn winter campaign"
           label="Autumn Winter campaign"
           className="absolute inset-0 h-full w-full object-cover object-[50%_30%]"
         />

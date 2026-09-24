@@ -121,7 +121,7 @@ export const categories = [
     label: "Women",
     count: 42,
     image:
-      "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=800&q=80",
+      "https://images.unsplash.com/photo-1589278042662-e60081fcb3d8?auto=format&fit=crop&w=800&q=80",
   },
   {
     slug: "men",

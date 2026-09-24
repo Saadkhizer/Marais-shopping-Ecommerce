@@ -1,3 +1,4 @@
+import Hairline from "./Hairline.jsx";
 import Reveal from "./Reveal.jsx";
 import SmartImage from "./SmartImage.jsx";
 import { categories } from "../data/products.js";
@@ -14,6 +15,10 @@ export default function CategoryGrid() {
           Three edits, one wardrobe
         </h2>
       </Reveal>
+
+      {/* The rule draws itself as the section enters — the one editorial
+          flourish on an otherwise still page. */}
+      <Hairline className="mt-8" />
 
       <div className="mt-10 grid grid-cols-1 gap-3 md:grid-cols-2 lg:grid-cols-4">
         {categories.map((category, index) => (

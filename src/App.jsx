@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
+import SmoothScroll from "./components/SmoothScroll.jsx";
 import Toast from "./components/Toast.jsx";
 import HomePage from "./routes/HomePage.jsx";
 import CheckoutPage from "./routes/CheckoutPage.jsx";
@@ -32,7 +33,7 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <>
+    <SmoothScroll>
       <ScrollToTop />
 
       <div className="bg-ink px-4 py-2.5 text-center text-[12.5px] font-light tracking-[0.02em] text-white/85">
@@ -55,6 +56,6 @@ export default function App() {
 
       <CartDrawer />
       <Toast />
-    </>
+    </SmoothScroll>
   );
 }
