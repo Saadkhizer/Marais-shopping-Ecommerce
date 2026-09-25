@@ -153,7 +153,7 @@ export default function ScrollWorld({ onFail }) {
       mesh.position.set(x, i % 2 === 0 ? 0.12 : -0.1, -i * SPACING);
       // Angle each plane back toward the centre line so the row reads as a
       // corridor you are moving through, not a wall you are sliding past.
-      mesh.rotation.y = -0.22;
+      mesh.rotation.y = -0.22;   // starting value; the tick loop drives it
       scene.add(mesh);
       planes.push(mesh);
     });
@@ -196,9 +196,31 @@ export default function ScrollWorld({ onFail }) {
 
       // The one blur on this page: the corridor softens as it hands off to the
       // page below, so the seam between canvas and content is not a hard cut.
-      const handoff = Math.max(0, (p - 0.86) / 0.14);
-      canvas.style.filter = handoff > 0 ? `blur(${(handoff * 7).toFixed(2)}px)` : "";
-      canvas.style.opacity = String(1 - handoff * 0.35);
+      //
+      // Held back to the last 6% and capped at 4px. At the previous 14% and
+      // 7px you could stop anywhere in the final stretch and simply be
+      // looking at a blurred picture — which reads as a broken render, not a
+      // transition. A handoff should only be visible while you are leaving.
+      const handoff = Math.max(0, (p - 0.94) / 0.06);
+      canvas.style.filter = handoff > 0 ? `blur(${(handoff * 4).toFixed(2)}px)` : "";
+      canvas.style.opacity = String(1 - handoff * 0.25);
+
+      // Each plane turns a little toward the camera as you approach and away
+      // again as you pass, the way a picture on a wall does when you walk
+      // past it. Partial, not full: a plane that tracks you exactly looks
+      // like a billboard following you down the road.
+      planes.forEach((mesh) => {
+        const dz = camera.position.z - mesh.position.z;      // + once passed
+        const dx = mesh.position.x - camera.position.x;
+        const bearing = Math.atan2(dx, Math.max(dz, 0.001));
+        mesh.rotation.y = -bearing * 0.55;
+
+        // A breath of scale at the focal distance so the framed shot has a
+        // touch more presence than its neighbours.
+        const focus = Math.max(0, 1 - Math.abs(dz + LEAD) / (SPACING * 0.9));
+        const scale = 1 + focus * 0.045;
+        mesh.scale.set(scale, scale, 1);
+      });
 
       // Captions: each owns a slice of the flight and fades at its edges.
       const slice = 1 / STATIONS.length;
